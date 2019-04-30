@@ -18,6 +18,8 @@ private:
 	void init_plan(Node O, Node L, Node Xc, Node G);
 	void repair_replan(Node O, Node L, Node Xc, Node G);
 	void process_state();
+
+	Matrix map;
 };
 
 #endif
