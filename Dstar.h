@@ -1,8 +1,6 @@
-#include <iostream>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <cmath>
+#include "Node.h"
+#include "Matrix.h"
 
 using namespace std;
 
@@ -11,6 +9,7 @@ using namespace std;
 
 class Dstar {
 public:
+	Dstar(Matrix map);
 
 private:
 	void prepare_repair(Node O, Node L, Node Xc);
