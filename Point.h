@@ -6,18 +6,18 @@ using namespace std;
 class POINT {
 public:
 	// constructor, pass in a filename(csv) with grid values
-	Point(int x, int y, double value);
+	Point(double x, double y, double value);
 
 	getX();
   getY();
   getValue();
-  setX(int newX);
-  setY(int newY);
+  setX(double newX);
+  setY(double newY);
   setValue(double newVal);
 
 private:
-	int x;
-  int y;
+	double x;
+  double y;
   double value;
 };
 

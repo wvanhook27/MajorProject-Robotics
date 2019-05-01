@@ -9,6 +9,7 @@ using namespace std;
 #ifndef MATRIX_H
 #define MATRIX_H
 
+//TODO robotLoc as an array of Points and a local variable, add goalLoc DO NOT keep track of robot on the grid
 class Matrix {
 public:
 	// constructor, pass in a filename(csv) with grid values

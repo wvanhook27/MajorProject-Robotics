@@ -10,14 +10,17 @@ using namespace std;
 class Dstar {
 public:
 	Dstar(Matrix map);
-	update()
+	update();
 
 private:
 	void expand(Node currentPoint);
 	boolean isRaise(Node point);
-	list<Node> openList;
-	list<Node> nodes;
+	vector<Node*> openSet;
+	vector<Node*> closedSet;
+	vector<Node*> nodes;
+	double dist_between(Node i, Node j);
 	Matrix map;
+	bool compFunction(Node i, Node j);
 };
 
 #endif

@@ -14,15 +14,15 @@ public:
 	vector<Node*> getNeighbors();
 	void setNextPointAndUpdateCost(Node node);
 	void calculateCostVia(Node node);
-	double getCost();
+	int getCost();
+	int getMinCost();
 	void setMinimumCostToCurrentCost();
 	void addNeighbor(Node* node);
 	boolean isNeighbor(Node possibleNeighbor);
 	Node* getBackPointer();
-	Node* getNextPointer();
-	void setNextPointer(Node* nextPointer);
 	void setBackPointer(Node* backPointer);
 	bool operator==(const Node &other) const;
+	Point avgPoint();
 
 private:
 	vector<Node*> neighbors;
