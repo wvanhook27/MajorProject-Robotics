@@ -9,7 +9,7 @@ using namespace std;
 class Node {
 public:
 	// constructor, pass in a filename(csv) with grid values
-	Node(Point p1, Point p2, Point p3, Point p4, double cost);
+	Node(Point p1, Point p2, Point p3, Point p4, int cost);
 
 	list<Node> getNeighbors();
 	Node nextPoint;
@@ -19,14 +19,18 @@ public:
 	void setMinimumCostToCurrentCost();
 	void addNeighbor();
 	boolean isNeighbor(Node possibleNeighbor);
+	void setBackPointer(Node* backPointer);
+	Node* getBackPointer();
 
 private:
-	list<Node> neighbors;
+	list<Node*> neighbors;
+	Node* backPointer;
 	Point p1;
 	Point p2;
 	Point p3;
 	Point p4;
-	double cost;
+	int cost;
+	int minCost;
 };
 
 #endif

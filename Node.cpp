@@ -1,6 +1,6 @@
 #include "Node.h"
 
-Node::Node(Point p1, Point p2, Point p3, Point p4, double cost)
+Node::Node(Point p1, Point p2, Point p3, Point p4, int cost)
 {
 	This.tag = tag;
 	This.p1 = p1;
