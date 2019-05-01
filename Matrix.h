@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <vector>
+#include "Point.h"
 
 using namespace std;
 
@@ -32,7 +34,14 @@ public:
 	int** getGrid();
 
 	// get the turtlebots current location
-	void getRobotLoc(int& x, int&y);
+	std::vector<Point> getRobotLoc();
+
+	void setRobotLoc(std::vector<Point> loc);
+
+	// get the turtlebots current location
+	std::vector<Point> getRobotLoc();
+
+	void setGoalLoc(std::vector<Point> loc)
 
 	// simply returns the value in this cell
 	int getValue(int x, int y);
@@ -54,6 +63,9 @@ private:
 
 	// store the orientation of the turtlebot
 	int orientation;
+
+	std::vector<Point> robotLoc;
+	std::vector<Point> goalLoc;
 
 	// helper function to retrieve length & width of map
 	void findDim(string filename, int& length, int& width);

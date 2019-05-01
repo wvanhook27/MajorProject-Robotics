@@ -1,5 +1,6 @@
 #include <string>
 #include <iterator>
+#include "Point.h"
 
 using namespace std;
 
@@ -12,28 +13,23 @@ public:
 	Node(Point p1, Point p2, Point p3, Point p4, int cost);
 
 	vector<Node*> getNeighbors();
-	void setNextPointAndUpdateCost(Node node);
-	void calculateCostVia(Node node);
-	int getCost();
-	int getMinCost();
-	void setMinimumCostToCurrentCost();
 	void addNeighbor(Node* node);
 	boolean isNeighbor(Node possibleNeighbor);
-	Node* getBackPointer();
-	void setBackPointer(Node* backPointer);
 	bool operator==(const Node &other) const;
 	Point avgPoint();
+	Point getP1();
+	Point getP2();
+	Point getP3();
+	Point getP4();
+	int getCost();
 
 private:
 	vector<Node*> neighbors;
-	Node* back;
-	Node* next;
 	Point p1;
 	Point p2;
 	Point p3;
 	Point p4;
 	int cost;
-	int minCost;
 };
 
 #endif
