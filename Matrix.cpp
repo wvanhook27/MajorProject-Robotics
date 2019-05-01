@@ -100,48 +100,6 @@ void Matrix::updateGrid(int x, int y, int val)
 	grid[y][x] = val;
 }
 
-/*
-Update the robot's current location
-The direction parameter will be as follows:
-1: North
-2: East
-3: South
-4: West
-*/
-void Matrix::updateRobotLoc(int direction)
-{
-	int x, y;
-	this->getRobotLoc(x, y);
-	if (direction == 1)
-	{
-		grid[y + 1][x] = 0;
-		grid[y + 1][x + 1] = 0;
-		grid[y - 1][x] = 1;
-		grid[y - 1][x + 1] = 1;
-	}
-	else if (direction == 2)
-	{
-		grid[y][x] = 0;
-		grid[y + 1][x] = 0;
-		grid[y][x + 2] = 1;
-		grid[y + 1][x + 2] = 1;
-	}
-	else if (direction == 3)
-	{
-		grid[y][x] = 0;
-		grid[y][x + 1] = 0;
-		grid[y + 2][x] = 1;
-		grid[y + 2][x + 1] = 1;
-	}
-	else if (direction == 4)
-	{
-		grid[y][x + 1] = 0;
-		grid[y + 1][x + 1] = 0;
-		grid[y][x - 1] = 1;
-		grid[y + 1][x - 1] = 1;
-	}
-}
-
 
 /*
 1: North
@@ -164,24 +122,28 @@ int** Matrix::getGrid()
 	return grid;
 }
 
+void Matrix::setRobotLoc(vector<Point> location)
+{
+	robotLoc = location;
+}
+
+void Matrix::setGoalLoc(vector<Point> location)
+{
+	goalLoc = location;
+}
+
 /*
 Gets the robots current location
 x and y are updated to the robots current top-left cell
 */
-void Matrix::getRobotLoc(int& x, int&y)
+vector<Point> Matrix::getRobotLoc()
 {
-	for (int i = 0; i < gridLength; i++)
-	{
-		for (int j = 0; j < gridWidth; j++)
-		{
-			if (grid[i][j] == 1)
-			{
-				x = j;
-				y = i;
-				return;
-			}
-		}
-	}
+	return robotLoc;
+}
+
+vector<Point> Matrix::getGoalLoc()
+{
+	return goalLoc;
 }
 
 /*

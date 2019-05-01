@@ -39,9 +39,9 @@ public:
 	void setRobotLoc(std::vector<Point> loc);
 
 	// get the turtlebots current location
-	std::vector<Point> getRobotLoc();
+	std::vector<Point> getGoalLoc();
 
-	void setGoalLoc(std::vector<Point> loc)
+	void setGoalLoc(std::vector<Point> loc);
 
 	// simply returns the value in this cell
 	int getValue(int x, int y);

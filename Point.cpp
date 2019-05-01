@@ -1,38 +1,56 @@
 #include "Point.h"
 
-Node::Node(int x, int y, double value)
+Point::Point(double x1, double y1, double value1)
 {
-	This.x = x;
-  This.y = y;
-  This.value = value;
+	x = x1;
+  y = y1;
+  value = value1;
+}
+Point::Point(Point &otherPoint)
+{
+  x = otherPoint.getX();
+  y = otherPoint.getY();
+  value = otherPoint.getValue();
 }
 
-Node::setX(int newX)
+void Point::setX(double newX)
 {
-  This.x = newX;
+  x = newX;
 }
 
-Node::setY(int newY)
+void Point::setY(double newY)
 {
-  This.y = newY;
+  y = newY;
 }
 
-Node::setValue(double newValue)
+void Point::setValue(double newValue)
 {
-  This.value = newValue;
+  value = newValue;
 }
 
-Node::getX()
+double Point::getX()
 {
   return x;
 }
 
-Node::getY()
+double Point::getY()
 {
   return y;
 }
 
-Node::getValue()
+double Point::getValue()
 {
   return value;
+}
+
+bool Point::operator==(const Point &other) const
+{
+  	if(x == other.x && y == other.y)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 }

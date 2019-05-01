@@ -3,17 +3,18 @@ using namespace std;
 #ifndef POINT_H
 #define POINT_H
 
-class POINT {
+class Point {
 public:
-	// constructor, pass in a filename(csv) with grid values
 	Point(double x, double y, double value);
+  Point(Point &otherPoint);
 
-	getX();
-  getY();
-  getValue();
-  setX(double newX);
-  setY(double newY);
-  setValue(double newVal);
+	double getX();
+  double getY();
+  double getValue();
+  void setX(double newX);
+  void setY(double newY);
+  void setValue(double newVal);
+  bool operator==(const Point &other) const;
 
 private:
 	double x;

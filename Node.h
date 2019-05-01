@@ -1,5 +1,6 @@
 #include <string>
 #include <iterator>
+#include <vector>
 #include "Point.h"
 
 using namespace std;
@@ -10,13 +11,13 @@ using namespace std;
 class Node {
 public:
 	// constructor, pass in a filename(csv) with grid values
-	Node(Point p1, Point p2, Point p3, Point p4, int cost);
+	Node(Point* p1, Point* p2, Point* p3, Point* p4, int cost);
 
 	vector<Node*> getNeighbors();
 	void addNeighbor(Node* node);
-	boolean isNeighbor(Node possibleNeighbor);
+	bool isNeighbor(Node* possibleNeighbor);
 	bool operator==(const Node &other) const;
-	Point avgPoint();
+	Point getAvgPoint();
 	Point getP1();
 	Point getP2();
 	Point getP3();
@@ -25,10 +26,10 @@ public:
 
 private:
 	vector<Node*> neighbors;
-	Point p1;
-	Point p2;
-	Point p3;
-	Point p4;
+	Point* p1;
+	Point* p2;
+	Point* p3;
+	Point* p4;
 	int cost;
 };
 

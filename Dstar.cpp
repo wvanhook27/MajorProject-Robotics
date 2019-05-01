@@ -1,41 +1,41 @@
 #include "Dstar.h"
 
-Dstar::Dstar(Matrix map)
+Dstar::Dstar(Matrix* map1)
 {
-	This.map = map;
-	int** grid = map.getGrid();
+	map = map1;
+	int** grid = (*map).getGrid();
 	int numRow = sizeof(grid)/sizeof(grid[0]);
-	int numCol = sizeof(grid[0])/sizeof(arr[0][0]);
-	std::vector<Point> robotLoc = map.getRobotLoc();
-	std::vector<Point> goalLoc = map.getgoalLoc();
-	start = new Node(robotLoc.at(0), robotLoc.at(1), robotLoc.at(2), robotLoc.at(3));
-	goal = new Node(goalLoc.at(0), goalLoc.at(1), goalLoc.at(2), goalLoc.at(3));
+	int numCol = sizeof(grid[0])/sizeof(grid[0][0]);
+	std::vector<Point> robotLoc = (*map).getRobotLoc();
+	std::vector<Point> goalLoc = (*map).getGoalLoc();
+	start = new Node(new Point(robotLoc.at(0)), new Point(robotLoc.at(1)), new Point(robotLoc.at(2)), new Point(robotLoc.at(3)), 0);
+	goal = new Node(new Point(goalLoc.at(0)), new Point(goalLoc.at(1)), new Point(goalLoc.at(2)), new Point(goalLoc.at(3)), 0);
 
 	for(int i = 0; i < numRow-1; i++)
 	{
-		for int j = 0; j < numCol-1; j++)
+		for(int j = 0; j < numCol-1; j++)
 		{
 			int val = 0;
-			if(min(grid[i,j], min(grid[i+1,j], min(grid[i,j+1], min(grid[i+1,j+1])))))
+			if(min(grid[i,j], min(grid[i+1,j], min(grid[i,j+1], grid[i+1,j+1]))))
 			{
 				val = 100000;
 			}
-			Node node = new Node(new Point[i, j, grid[i,j]],
-													new Point[i+1, j, grid[i+1,j]],
-													new Point[i, j+1, grid[i,j+1]],
-													new Point[i+1, j+1, grid[i+1,j+1]],
+			Node* node = new Node(new Point((double)i, (double)j, (double)((*map).getValue(i,j))),
+													new Point((double)i+1, (double)j, (double)((*map).getValue(i+1,j))),
+													new Point((double)i, (double)j+1, (double)((*map).getValue(i,j+1))),
+													new Point((double)i+1, (double)j+1, (double)((*map).getValue(i+1,j+1))),
 												val);
 			if(node == start)
 			{
-				nodes.insert(&start);
+				nodes.push_back(start);
 			}
 			else if(node == goal)
 			{
-				nodes.insert(&goal);
+				nodes.push_back(goal);
 			}
 			else
 			{
-				nodes.insert(&node);
+				nodes.push_back(node);
 			}
 		}
 	}
@@ -43,15 +43,15 @@ Dstar::Dstar(Matrix map)
 	{
 		for(Node* node2 : nodes)
 		{
-			if(node1.isNeighbor(*node2))
+			if((*node1).isNeighbor(node2))
 			{
-				node1.addNeighbor(node2);
+				(*node1).addNeighbor(node2);
 			}
 		}
 	}
 }
 
-int Dstar::where(std::vector<Node> v, Node* node)
+int Dstar::where(std::vector<Node*> v, Node* node)
 {
 	for(int i = 0; i < v.size(); i++)
 	{
@@ -65,8 +65,8 @@ int Dstar::where(std::vector<Node> v, Node* node)
 
 std::vector<Node> Dstar::reconstruct_path(std::map<Node*, Node*> cameFrom, Node* current)
 {
-	std::vector<Node> total_path = new std::vector<Node>;
-	total_path.insert(*current);
+	std::vector<Node> total_path;
+	total_path.push_back(*current);
 	while(cameFrom.count(current) > 0)
 	{
 	    current = cameFrom[current];
@@ -77,32 +77,32 @@ std::vector<Node> Dstar::reconstruct_path(std::map<Node*, Node*> cameFrom, Node*
 
 std::vector<Node> Dstar::plan_path()
 {
-		double distance = -start.getAvgPoint().getX() + goal.getAvgPoint().getX() - start.getAvgPoint().getY() + goal.getAvgPoint().getY();
+		double distance = -(*start).getAvgPoint().getX() + (*goal).getAvgPoint().getX() - (*start).getAvgPoint().getY() + (*goal).getAvgPoint().getY();
 
 		std::map<Node*, Node*> cameFrom;
 
 		std::map<Node*, double> gScore;
-		gScore[&start] = 0;
+		gScore[start] = 0;
 
 		std::map<Node*, double> fScore;
-		fScore[&start] = distance;
+		fScore[start] = distance;
 
-		std::vector<Node*> openSet = new std::vector<Node*>;
-		openSet.insert(&start);
+		std::vector<Node*> openSet;
+		openSet.push_back(start);
 
-		std::vector<Node*> closedSet = new std::vector<Node*> v;
+		std::vector<Node*> closedSet;
 
 		while(openSet.size() > 0)
 		{
-			Node* current = lowest(openSet);
+			Node* current = lowest(openSet, fScore);
 			if(current == goal)
 			{
 				return reconstruct_path(cameFrom, current);
 			}
-			openSet.erase(where(openSet, current));
-			closedSet.insert(current);
+			openSet.erase(openSet.begin() + where(openSet, current));
+			closedSet.push_back(current);
 
-			for(neighbor : current.getNeighbors)
+			for(Node* neighbor : (*current).getNeighbors())
 			{
 				 if(where(closedSet, neighbor))
 				 {
@@ -110,7 +110,7 @@ std::vector<Node> Dstar::plan_path()
 				 }
 
 				 // The distance from start to a neighbor
-				 double tentative_gScore = gScore[current] + dist_between(current, neighbor) + (*neighbor).getCost();
+				 double tentative_gScore = gScore[current] + dist_between(*current, *neighbor) + (*neighbor).getCost();
 
 				 if(!where(openSet, neighbor))	// Discover a new node
 				 {
@@ -124,7 +124,7 @@ std::vector<Node> Dstar::plan_path()
 				 // This path is the best until now. Record it!
 				 cameFrom[neighbor] = current;
 				 gScore[neighbor] = tentative_gScore;
-				 fScore[neighbor] = gScore[neighbor] + dist_between(neighbor, goal);
+				 fScore[neighbor] = gScore[neighbor] + dist_between(*neighbor, *goal);
 			 }
 		}
 }
@@ -142,9 +142,9 @@ Node* lowest(std::vector<Node*> openSet, std::map<Node*, double> fScore)
 	return lowest;
 }
 
-double dist_between(Node* node1, Node* node2)
+double dist_between(Node node1, Node node2)
 {
-	Point point1 = (*node1).getAvgPoint();
-	Point point2 = (*node2).getAvgPoint();
-	return abs(point1.getX() - point2.getX()) + abs(point1.getY() - point2.getY());
+	Point* point1 = &(node1.getAvgPoint());
+	Point* point2 = &(node2.getAvgPoint());
+	return abs((*point1).getX() - (*point2).getX()) + abs((*point1).getY() - (*point2).getY());
 }
