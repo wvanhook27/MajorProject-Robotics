@@ -11,20 +11,23 @@ public:
 	// constructor, pass in a filename(csv) with grid values
 	Node(Point p1, Point p2, Point p3, Point p4, int cost);
 
-	list<Node> getNeighbors();
-	Node nextPoint;
-	void setNextPointAndUpdateCost(Node point);
-	void calculateCostVia(Node point);
+	vector<Node*> getNeighbors();
+	void setNextPointAndUpdateCost(Node node);
+	void calculateCostVia(Node node);
 	double getCost();
 	void setMinimumCostToCurrentCost();
-	void addNeighbor();
+	void addNeighbor(Node* node);
 	boolean isNeighbor(Node possibleNeighbor);
-	void setBackPointer(Node* backPointer);
 	Node* getBackPointer();
+	Node* getNextPointer();
+	void setNextPointer(Node* nextPointer);
+	void setBackPointer(Node* backPointer);
+	bool operator==(const Node &other) const;
 
 private:
-	list<Node*> neighbors;
-	Node* backPointer;
+	vector<Node*> neighbors;
+	Node* back;
+	Node* next;
 	Point p1;
 	Point p2;
 	Point p3;
