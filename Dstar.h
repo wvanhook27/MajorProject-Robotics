@@ -10,15 +10,13 @@ using namespace std;
 class Dstar {
 public:
 	Dstar(Matrix map);
+	update()
 
 private:
-	void prepare_repair(Node O, Node L, Node Xc);
-	void insert(Node O, Node X, Node hnew);
-	void modify_cost(Node O, Node, X, Node Y, int cval);
-	void init_plan(Node O, Node L, Node Xc, Node G);
-	void repair_replan(Node O, Node L, Node Xc, Node G);
-	void process_state();
-
+	void expand(Node currentPoint);
+	boolean isRaise(Node point);
+	list<Node> openList;
+	list<Node> nodes;
 	Matrix map;
 };
 

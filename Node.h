@@ -1,4 +1,5 @@
 #include <string>
+#include <iterator>
 
 using namespace std;
 
@@ -8,13 +9,24 @@ using namespace std;
 class Node {
 public:
 	// constructor, pass in a filename(csv) with grid values
-	Node(string tag);
+	Node(Point p1, Point p2, Point p3, Point p4, double cost);
 
-	string getTag();
-
+	list<Node> getNeighbors();
+	Node nextPoint;
+	void setNextPointAndUpdateCost(Node point);
+	void calculateCostVia(Node point);
+	double getCost();
+	void setMinimumCostToCurrentCost();
+	void addNeighbor();
+	boolean isNeighbor(Node possibleNeighbor);
 
 private:
-	string tag;
+	list<Node> neighbors;
+	Point p1;
+	Point p2;
+	Point p3;
+	Point p4;
+	double cost;
 };
 
 #endif
