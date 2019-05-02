@@ -1,4 +1,6 @@
-﻿  Dstar.cpp
-C:\Users\mason\OneDrive\Documents\GitHub\MajorProject-Robotics\Dstar.cpp(55): warning C4018: '<': signed/unsigned mismatch
-C:\Users\mason\OneDrive\Documents\GitHub\MajorProject-Robotics\Dstar.cpp(69): warning C4018: '<': signed/unsigned mismatch
-  MPG1.vcxproj -> C:\Users\mason\OneDrive\Documents\GitHub\MajorProject-Robotics\Debug\MPG1.exe
+﻿  test.cpp
+D:\Users\Eric\Documents\GitHub\MajorProject-Robotics\test.cpp(26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Users\Eric\Documents\GitHub\MajorProject-Robotics\test.cpp(27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Users\Eric\Documents\GitHub\MajorProject-Robotics\test.cpp(28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Users\Eric\Documents\GitHub\MajorProject-Robotics\test.cpp(29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  MPG1.vcxproj -> D:\Users\Eric\Documents\GitHub\MajorProject-Robotics\Debug\MPG1.exe

@@ -119,7 +119,7 @@ std::vector<Node> Dstar::plan_path()
 			{
 				 if(where(closedSet, neighbor) != -1)
 				 {
-						 break;		// Ignore the neighbor which is already evaluated.
+						 continue;		// Ignore the neighbor which is already evaluated.
 				 }
 
 				 // The distance from start to a neighbor
@@ -131,7 +131,7 @@ std::vector<Node> Dstar::plan_path()
 				 }
 				 else if (tentative_gScore >= gScore[neighbor])
 				 {
-					 break;
+					 continue;
 				 }
 
 				 // This path is the best until now. Record it!
