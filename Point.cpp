@@ -6,12 +6,6 @@ Point::Point(double x1, double y1, double value1)
   y = y1;
   value = value1;
 }
-Point::Point(Point &otherPoint)
-{
-  x = otherPoint.getX();
-  y = otherPoint.getY();
-  value = otherPoint.getValue();
-}
 
 void Point::setX(double newX)
 {

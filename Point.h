@@ -6,7 +6,6 @@ using namespace std;
 class Point {
 public:
 	Point(double x, double y, double value);
-  Point(Point &otherPoint);
 
 	double getX();
   double getY();

@@ -109,7 +109,6 @@ void Matrix::updateGrid(int x, int y, int val)
 */
 int Matrix::getOrientation()
 {
-	if (orientation == NULL) return 0;
 	return orientation;
 }
 
