@@ -7,6 +7,13 @@ Point::Point(double x1, double y1, double value1)
   value = value1;
 }
 
+Point::Point(const Point& other)
+{
+	x = other.x;
+	y = other.y;
+	value = other.value;
+}
+
 void Point::setX(double newX)
 {
   x = newX;

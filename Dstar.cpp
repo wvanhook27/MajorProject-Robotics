@@ -4,8 +4,10 @@ Dstar::Dstar(Matrix* map1)
 {
 	map = map1;
 	int** grid = (*map).getGrid();
-	int numRow = sizeof(grid)/sizeof(grid[0]);
-	int numCol = sizeof(grid[0])/sizeof(grid[0][0]);
+	//int numRow = sizeof(grid)/sizeof(grid[0]);
+	//int numCol = sizeof(grid[0])/sizeof(grid[0][0]);
+	int numRow = (*map).getWidth();
+	int numCol = (*map).getLength();
 	std::vector<Point> robotLoc = (*map).getRobotLoc();
 	std::vector<Point> goalLoc = (*map).getGoalLoc();
 	start = new Node(new Point(robotLoc.at(0)), new Point(robotLoc.at(1)), new Point(robotLoc.at(2)), new Point(robotLoc.at(3)), 0);
@@ -16,20 +18,29 @@ Dstar::Dstar(Matrix* map1)
 		for(int j = 0; j < numCol-1; j++)
 		{
 			int val = 0;
-			if(min(grid[i,j], min(grid[i+1,j], min(grid[i,j+1], grid[i+1,j+1]))))
-			{
+			int grid1 = map->getValue(i, j);
+			int grid2 = map->getValue(i+1, j);
+			int grid3 = map->getValue(i, j+1);
+			int grid4 = map->getValue(i+1, j+1);
+			int minimum = min(grid1, min(grid2, min(grid3, grid4)));
+			if(minimum == -1)
+			{		
 				val = 100000;
+			}
+			else
+			{
+				val = 0;
 			}
 			Node* node = new Node(new Point((double)i, (double)j, (double)((*map).getValue(i,j))),
 													new Point((double)i+1, (double)j, (double)((*map).getValue(i+1,j))),
 													new Point((double)i, (double)j+1, (double)((*map).getValue(i,j+1))),
 													new Point((double)i+1, (double)j+1, (double)((*map).getValue(i+1,j+1))),
 												val);
-			if(node == start)
+			if(*node == *start)
 			{
 				nodes.push_back(start);
 			}
-			else if(node == goal)
+			else if(*node == *goal)
 			{
 				nodes.push_back(goal);
 			}
@@ -41,14 +52,16 @@ Dstar::Dstar(Matrix* map1)
 	}
 	for(Node* node1 : nodes)
 	{
-		for(Node* node2 : nodes)
+		for(int i = 0; i < nodes.size(); i++)
 		{
+			Node* node2 = nodes.at(i);
 			if((*node1).isNeighbor(node2))
 			{
 				(*node1).addNeighbor(node2);
 			}
 		}
 	}
+
 }
 
 int Dstar::where(std::vector<Node*> v, Node* node)
@@ -101,10 +114,10 @@ std::vector<Node> Dstar::plan_path()
 			}
 			openSet.erase(openSet.begin() + where(openSet, current));
 			closedSet.push_back(current);
-
-			for(Node* neighbor : (*current).getNeighbors())
+			vector<Node*> neighbors = current->getNeighbors();
+			for(Node* neighbor : neighbors)
 			{
-				 if(where(closedSet, neighbor))
+				 if(where(closedSet, neighbor) != -1)
 				 {
 						 break;		// Ignore the neighbor which is already evaluated.
 				 }
@@ -112,7 +125,7 @@ std::vector<Node> Dstar::plan_path()
 				 // The distance from start to a neighbor
 				 double tentative_gScore = gScore[current] + dist_between(*current, *neighbor) + (*neighbor).getCost();
 
-				 if(!where(openSet, neighbor))	// Discover a new node
+				 if(where(openSet, neighbor) == -1)	// Discover a new node
 				 {
 						 openSet.push_back(neighbor);
 				 }
@@ -127,11 +140,12 @@ std::vector<Node> Dstar::plan_path()
 				 fScore[neighbor] = gScore[neighbor] + dist_between(*neighbor, *goal);
 			 }
 		}
+		return(reconstruct_path(cameFrom, nullptr));
 }
 
 Node* Dstar::lowest(std::vector<Node*> openSet, std::map<Node*, double> fScore)
 {
-	int lowestVal = 100000;
+	int lowestVal = 1000000;
 	Node* lowest = openSet.at(0);
 	for(Node* node: openSet)
 	{

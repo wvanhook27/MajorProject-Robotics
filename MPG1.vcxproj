@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{BFF204AE-52EE-4D97-9B0C-9573DEE211BF}</ProjectGuid>
+    <ProjectGuid>{22A4FB41-C490-48A9-92DF-AEA093A24F23}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -79,7 +79,7 @@
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,13 +109,6 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Point.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".vscode\ipch\12090240a91a08c6\mmap_address.bin" />
-    <None Include=".vscode\ipch\624fa5f2067c867a\mmap_address.bin" />
-    <None Include=".vscode\ipch\640718100189ab0a\mmap_address.bin" />
-    <None Include=".vscode\ipch\f823cfff104ed2d3\mmap_address.bin" />
-    <None Include=".vscode\ipch\f93fce90db865d24\mmap_address.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

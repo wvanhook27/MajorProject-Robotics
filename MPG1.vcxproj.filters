@@ -45,21 +45,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".vscode\ipch\12090240a91a08c6\mmap_address.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include=".vscode\ipch\624fa5f2067c867a\mmap_address.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include=".vscode\ipch\640718100189ab0a\mmap_address.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include=".vscode\ipch\f823cfff104ed2d3\mmap_address.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include=".vscode\ipch\f93fce90db865d24\mmap_address.bin">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

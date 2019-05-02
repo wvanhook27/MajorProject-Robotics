@@ -9,9 +9,54 @@ Node::Node(Point* point1, Point* point2, Point* point3, Point* point4, int val)
 	cost = val;
 }
 
+Node::Node(const Node& other)
+{
+	p1 = other.p1;
+	p2 = other.p2;
+	p3 = other.p3;
+	p4 = other.p4;
+	cost = other.cost;
+}
+
 bool Node::operator==(const Node &other) const
 {
-	return(other.p1 == p1 && other.p2 == p2 && other.p3 == p3 && other.p4 == p4);
+	int trueCount = 0;
+	bool p1b = (*p1 == *other.p1) ||
+		(*p1 == *other.p2) ||
+		(*p1 == *other.p3) ||
+		(*p1 == *other.p4);
+
+	bool p2b = (*p2 == *other.p1) ||
+		(*p2 == *other.p2) ||
+		(*p2 == *other.p3) ||
+		(*p2 == *other.p4);
+
+	bool p3b = (*p3 == *other.p1) ||
+		(*p3 == *other.p2) ||
+		(*p3 == *other.p3) ||
+		(*p3 == *other.p4);
+
+	bool p4b = (*p3 == *other.p1) ||
+		(*p4 == *other.p2) ||
+		(*p4 == *other.p3) ||
+		(*p4 == *other.p4);
+	if (p1b)
+		trueCount++;
+	if (p2b)
+		trueCount++;
+	if (p3b)
+		trueCount++;
+	if (p4b)
+		trueCount++;
+
+	if (trueCount == 4)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Node::addNeighbor(Node* neighbor)
@@ -21,22 +66,37 @@ void Node::addNeighbor(Node* neighbor)
 
 bool Node::isNeighbor(Node* possibleNeighbor)
 {
-	bool p1b = *p1 == (*possibleNeighbor).getP1();
-	bool p2b = *p2 == (*possibleNeighbor).getP2();
-	bool p3b = *p3 == (*possibleNeighbor).getP3();
-	bool p4b = *p4 == (*possibleNeighbor).getP4();
-	if(p1b && p2b && p3b && p4b)
+	int trueCount = 0;
+	bool p1b = (*p1 == (*possibleNeighbor).getP1()) ||
+				(*p1 == (*possibleNeighbor).getP2()) ||
+				(*p1 == (*possibleNeighbor).getP3()) ||
+				(*p1 == (*possibleNeighbor).getP4());
+
+	bool p2b = (*p2 == (*possibleNeighbor).getP1()) ||
+				(*p2 == (*possibleNeighbor).getP2()) ||
+				(*p2 == (*possibleNeighbor).getP3()) ||
+				(*p2 == (*possibleNeighbor).getP4());
+
+	bool p3b = (*p3 == (*possibleNeighbor).getP1()) ||
+				(*p3 == (*possibleNeighbor).getP2()) ||
+				(*p3 == (*possibleNeighbor).getP3()) ||
+				(*p3 == (*possibleNeighbor).getP4());
+
+	bool p4b = (*p3 == (*possibleNeighbor).getP1()) ||
+				(*p4 == (*possibleNeighbor).getP2()) ||
+				(*p4 == (*possibleNeighbor).getP3()) ||
+				(*p4 == (*possibleNeighbor).getP4());
+	if (p1b)
+		trueCount++;
+	if (p2b)
+		trueCount++;
+	if (p3b)
+		trueCount++;
+	if (p4b)
+		trueCount++;
+
+	if (trueCount == 2)
 	{
-		return false;
-	}
-	else if ((p1b && p2b) || (p1b && p3b) || (p1b && p4b)) {
-		return true;
-	}
-	else if((p2b && p3b) || (p2b && p4b))
-	{
-		return true;
-	}
-	else if (p3b && p4b) {
 		return true;
 	}
 	else

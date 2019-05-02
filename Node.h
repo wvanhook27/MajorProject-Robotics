@@ -12,6 +12,7 @@ class Node {
 public:
 	// constructor, pass in a filename(csv) with grid values
 	Node(Point* p1, Point* p2, Point* p3, Point* p4, int cost);
+	Node(const Node& other);
 
 	vector<Node*> getNeighbors();
 	void addNeighbor(Node* node);

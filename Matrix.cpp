@@ -207,3 +207,13 @@ void Matrix::findDim(string filename, int& length, int& width)
 	}
 	width = width / length;
 }
+
+int Matrix::getWidth()
+{
+	return gridWidth;
+}
+
+int Matrix::getLength()
+{
+	return gridLength;
+}

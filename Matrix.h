@@ -24,9 +24,6 @@ public:
 	// update grid cell with new value
 	void updateGrid(int x, int y, int val);
 
-	// update the robot's location
-	void updateRobotLoc(int direction);
-
 	// get the orientation
 	int getOrientation();
 
@@ -52,6 +49,9 @@ public:
 	// functions for finding Cartesian and Manhattan distances
 	double cartesian(int x1, int y1, int x2, int y2);
 	double manhattan(int x1, int y1, int x2, int y2);
+
+	int getWidth();
+	int getLength();
 
 private:
 	// matrix the grid/map will be stored in
