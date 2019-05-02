@@ -22,7 +22,7 @@ int main()
     vector<Node> nodes = star.plan_path();
     for(Node node: nodes)
     {
-        printf("%d, %d\n", node.getAvgPoint().getX(), node.getAvgPoint().getX());
+        printf("%lf, %lf\n", node.getAvgPoint().getX(), node.getAvgPoint().getY());
     }
     
     return 0;

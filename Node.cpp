@@ -11,14 +11,7 @@ Node::Node(Point* point1, Point* point2, Point* point3, Point* point4, int val)
 
 bool Node::operator==(const Node &other) const
 {
-  	if(other.p1 == p1 && other.p2 == p2 && other.p3 == p3 && other.p3 == p3)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return(other.p1 == p1 && other.p2 == p2 && other.p3 == p3 && other.p4 == p4);
 }
 
 void Node::addNeighbor(Node* neighbor)

@@ -7,7 +7,7 @@ class Point {
 public:
 	Point(double x, double y, double value);
 
-	double getX();
+  double getX();
   double getY();
   double getValue();
   void setX(double newX);
@@ -16,7 +16,7 @@ public:
   bool operator==(const Point &other) const;
 
 private:
-	double x;
+  double x;
   double y;
   double value;
 };

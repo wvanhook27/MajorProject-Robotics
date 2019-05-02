@@ -129,7 +129,7 @@ std::vector<Node> Dstar::plan_path()
 		}
 }
 
-Node* lowest(std::vector<Node*> openSet, std::map<Node*, double> fScore)
+Node* Dstar::lowest(std::vector<Node*> openSet, std::map<Node*, double> fScore)
 {
 	int lowestVal = 100000;
 	Node* lowest = openSet.at(0);
@@ -142,7 +142,7 @@ Node* lowest(std::vector<Node*> openSet, std::map<Node*, double> fScore)
 	return lowest;
 }
 
-double dist_between(Node node1, Node node2)
+double Dstar::dist_between(Node node1, Node node2)
 {
 	Point* point1 = &(node1.getAvgPoint());
 	Point* point2 = &(node2.getAvgPoint());
